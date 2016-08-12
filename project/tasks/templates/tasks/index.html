@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <style type="text/css">
+    .root-container {
+      margin-top: 15px;
+    }
+
+    .button-row {
+      margin-bottom: 20px;
+    }
+  </style>
+  <script type="text/javascript">App = {};</script>
+  <script type="text/javascript" src="{% static 'tasks/index.js' %}"></script>
+</head>
+<body>
+  <div class="root-container container">
+    <div class="row button-row">
+      <div class="col-xs-12">
+        <button class="btn btn-success" id="createTask">Создать задание</button>
+        <button class="btn btn-info" id="resetTasks">Очистить задания</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <table class="table" id="taskTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Дата создания</th>
+              <th>Статус</th>
+              <th>Дата завершения</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
