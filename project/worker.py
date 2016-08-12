@@ -72,14 +72,15 @@ def main():
 
         k = 2 - len(PROCESSES)
 
-        try:
-            queryset = Task.objects.select_for_update(nowait=True)\
-                .filter(status=Task.STATUS_PENDING).order_by('timestamp')[:k]
-        except DatabaseError:
-            pass
-        else:
-            for task_model in queryset:
-                WorkerProcess(task_model.id).run()
+        with transaction.atomic():
+            try:
+                queryset = Task.objects.select_for_update(nowait=True)\
+                    .filter(status=Task.STATUS_PENDING).order_by('timestamp')[:k]
+            except DatabaseError:
+                pass
+            else:
+                for task_model in queryset:
+                    WorkerProcess(task_model.id).run()
 
         time.sleep(0.05)
 
